@@ -22,25 +22,25 @@ const nivel = [
 
 function App() {
 
-  const [nivelJogo, setNivelJogo] = useState(nivel[0].name);
+  const [nivelJogo, setNivelJogo] = useState(nivel[0].nome);
 
   const [words] = useState(wordsList);
   console.log(words);
 
   // ira para tela de inicio do jogo Game.jsx
   const iniciarJogo = () => {
-    setNivelJogo(nivel[1].name);
+    setNivelJogo(nivel[1].nome);
 ;  }
   // verificaçao da letra
 
   const verificarLetra = () => {
-    setNivelJogo(nivel[2].name);
+    setNivelJogo(nivel[2].nome);
   }
 
   // jogar novamente quando finalizar o jogo
 
   const jogarNovamente = () => {
-    setNivelJogo(nivel[1].name)
+    setNivelJogo(nivel[1].nome)
   }
 
   return (
