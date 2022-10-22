@@ -25,12 +25,42 @@ function App() {
   const [nivelJogo, setNivelJogo] = useState(nivel[0].nome);
 
   const [words] = useState(wordsList);
-  console.log(words);
+  
+  //Escolhendo palavras e categorias de forma aleatória
+  const [escolhaPalavra, setEscolhaPalavra] = useState("");
+  const [escolhaCategoria, setEscolhaCategoria] = useState("");
+  const [escolhaLetras, setEscolhaLetras] = useState([]);
+  
+  const escolhaPalavraECategoria = ()=>{
+      const categorias = Object.keys(words);
+      const categoria = categorias[Math.floor(Math.random()* Object.keys(categorias).length)];
+
+      const palavra = words[categoria][Math.floor(Math.random()* words[categoria].length)];
+    
+
+    return {palavra, categoria};
+  };
 
   // ira para tela de inicio do jogo Game.jsx
   const iniciarJogo = () => {
-    setNivelJogo(nivel[1].nome);
-;  }
+
+    //função de seleção de categoria e da palavra dentro da categoria
+    const {palavra, categoria} = escolhaPalavraECategoria();
+    console.log(palavra, categoria);
+
+    //dividindo as palavras em letras;
+     let letrasPalavra = palavra.split("");
+
+     letrasPalavra = letrasPalavra.map((l) => l.toLowerCase());
+     console.log(letrasPalavra);
+
+     setEscolhaPalavra(palavra);
+     setEscolhaCategoria(categoria);
+     setEscolhaPalavra(escolhaLetras);
+     
+     setNivelJogo(nivel[1].nome);
+  }
+  
   // verificaçao da letra
 
   const verificarLetra = () => {
@@ -40,7 +70,7 @@ function App() {
   // jogar novamente quando finalizar o jogo
 
   const jogarNovamente = () => {
-    setNivelJogo(nivel[1].nome)
+    setNivelJogo(nivel[0].nome)
   }
 
   return (

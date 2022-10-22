@@ -6,7 +6,7 @@ const EndGame = ({jogarNovamente}) => {
     <div>
         <h1>Jogo</h1>
         
-        <button onClick={jogarNovamente}>Finalizar Jogo</button>
+        <button onClick={jogarNovamente}> Jogar Novamente</button>
     </div>
   )
 }
