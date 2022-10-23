@@ -90,15 +90,33 @@ function App() {
     else{
       setLetrasErradas((atualLetraErrada) =>[
         ...atualLetraErrada,normalizaLetraUser,
-      ])
+      ]);
+
+      setTentativas((atualTentativa)=> atualTentativa -1);
     }
-    console.log(letrasAdivinhadas)
-    console.log(letrasErradas)
+  };
+  
+  const limparLetras = () =>{
+    setLetrasAdivinhadas([]);
+    setLetrasErradas([]);
+
   }
+
+  useEffect(()=>{
+    if(tentativas <= 0){
+      // função para apagar tudo reiniciar
+      limparLetras();
+
+      setNivelJogo(nivel[2].nome)
+    }
+  }, [tentativas])
+
 
   // jogar novamente quando finalizar o jogo
 
   const jogarNovamente = () => {
+    setPontuacao(0);
+    setTentativas(5);
     setNivelJogo(nivel[0].nome)
   }
 
