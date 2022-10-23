@@ -72,6 +72,28 @@ function App() {
 
   const verificarLetra = (letra) => {
     console.log(letra);
+
+    const normalizaLetraUser = letra.toLowerCase();
+
+    // checar se a letra já foi usada
+
+    if(letrasAdivinhadas.includes(normalizaLetraUser) || letrasErradas.includes(normalizaLetraUser)){
+      return;
+    }
+    // colocar a letra adivinhada no painel ou remover a chance.
+
+    if(escolhaLetras.includes(normalizaLetraUser)){
+      setLetrasAdivinhadas((atualLetraAdivinhada) => [
+        ...atualLetraAdivinhada,normalizaLetraUser,
+      ]);
+    }
+    else{
+      setLetrasErradas((atualLetraErrada) =>[
+        ...atualLetraErrada,normalizaLetraUser,
+      ])
+    }
+    console.log(letrasAdivinhadas)
+    console.log(letrasErradas)
   }
 
   // jogar novamente quando finalizar o jogo

@@ -34,7 +34,7 @@ const Game = ({verificarLetra, escolhaPalavra, escolhaCategoria, escolhaLetras, 
       
       <div className="containerPalavra">
         {escolhaLetras.map((letra, i)=>(
-            letrasAdivinhadas.includes(escolhaLetras) ? (<span key={i} className="letra">{letra}</span>) : (<span key={i} className="quadradoBranco"></span>)
+            letrasAdivinhadas.includes(letra) ? (<span key={i} className="letra">{letra}</span>) : (<span key={i} className="quadradoBranco"></span>)
         ))}
       </div>
       
