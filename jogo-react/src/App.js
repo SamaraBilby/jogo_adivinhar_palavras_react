@@ -31,12 +31,19 @@ function App() {
   const [escolhaCategoria, setEscolhaCategoria] = useState("");
   const [escolhaLetras, setEscolhaLetras] = useState([]);
   
+  const [letrasAdivinhadas, setLetrasAdivinhadas] = useState([]);
+  const [letrasErradas, setLetrasErradas] =useState([]);
+  const [tentativas, setTentativas] =useState(5);
+  const [pontuacao, setPontuacao] = useState(0);
+ 
+
+  
   const escolhaPalavraECategoria = ()=>{
       const categorias = Object.keys(words);
       const categoria = categorias[Math.floor(Math.random()* Object.keys(categorias).length)];
 
       const palavra = words[categoria][Math.floor(Math.random()* words[categoria].length)];
-    
+      
 
     return {palavra, categoria};
   };
@@ -56,8 +63,8 @@ function App() {
 
      setEscolhaPalavra(palavra);
      setEscolhaCategoria(categoria);
-     setEscolhaPalavra(escolhaLetras);
-     
+     setEscolhaLetras(letrasPalavra);
+
      setNivelJogo(nivel[1].nome);
   }
   
@@ -74,13 +81,17 @@ function App() {
   }
 
   return (
+    
     <div className="App">
       
      {nivelJogo === "start" && <TelaInicial iniciarJogo={iniciarJogo}/>}
-     {nivelJogo === "game" && <Game verificarLetra={verificarLetra}/>}
+
+     {nivelJogo === "game" && <Game verificarLetra={verificarLetra} escolhaPalavra={escolhaPalavra} escolhaCategoria = {escolhaCategoria} escolhaLetras={escolhaLetras} letrasAdivinhadas={letrasAdivinhadas} letrasErradas={letrasErradas} tentativas= {tentativas} pontuacao={pontuacao}/>}
+     
      {nivelJogo === "end" && <EndGame jogarNovamente={jogarNovamente}/>}
 
     </div>
+  
   );
 }
 
