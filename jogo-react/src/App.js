@@ -70,8 +70,8 @@ function App() {
   
   // verificaçao da letra
 
-  const verificarLetra = () => {
-    setNivelJogo(nivel[2].nome);
+  const verificarLetra = (letra) => {
+    console.log(letra);
   }
 
   // jogar novamente quando finalizar o jogo
