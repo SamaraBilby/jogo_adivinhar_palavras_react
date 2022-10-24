@@ -38,7 +38,7 @@ function App() {
  
 
   
-  const escolhaPalavraECategoria = ()=>{
+  const escolhaPalavraECategoria = useCallback(()=>{
       const categorias = Object.keys(words);
       const categoria = categorias[Math.floor(Math.random()* Object.keys(categorias).length)];
 
@@ -46,10 +46,11 @@ function App() {
       
 
     return {palavra, categoria};
-  };
+  }, [words]);
 
   // ira para tela de inicio do jogo Game.jsx
-  const iniciarJogo = () => {
+  const iniciarJogo = useCallback(() => {
+    limparLetras();
 
     //função de seleção de categoria e da palavra dentro da categoria
     const {palavra, categoria} = escolhaPalavraECategoria();
@@ -66,7 +67,7 @@ function App() {
      setEscolhaLetras(letrasPalavra);
 
      setNivelJogo(nivel[1].nome);
-  }
+  }, [escolhaPalavraECategoria]);
   
   // verificaçao da letra
 
@@ -109,7 +110,27 @@ function App() {
 
       setNivelJogo(nivel[2].nome)
     }
-  }, [tentativas])
+  }, [tentativas]);
+
+  useEffect(()=>{
+
+    const letrasunicas = [...new Set(escolhaLetras)]
+
+    // condicao de vitoria
+
+    if(letrasAdivinhadas.length === letrasunicas.length) {
+      // adicionando pontuação
+      setPontuacao((atualPontucao) => atualPontucao += 100)
+
+      // reiniciar uma nova palavra
+
+      iniciarJogo();
+
+    }
+
+    console.log(letrasunicas)
+
+  }, [letrasAdivinhadas, escolhaLetras, iniciarJogo]);  
 
 
   // jogar novamente quando finalizar o jogo
@@ -128,7 +149,7 @@ function App() {
 
      {nivelJogo === "game" && <Game verificarLetra={verificarLetra} escolhaPalavra={escolhaPalavra} escolhaCategoria = {escolhaCategoria} escolhaLetras={escolhaLetras} letrasAdivinhadas={letrasAdivinhadas} letrasErradas={letrasErradas} tentativas= {tentativas} pontuacao={pontuacao}/>}
      
-     {nivelJogo === "end" && <EndGame jogarNovamente={jogarNovamente}/>}
+     {nivelJogo === "end" && <EndGame jogarNovamente={jogarNovamente} pontuacao={pontuacao}/>}
 
     </div>
   
